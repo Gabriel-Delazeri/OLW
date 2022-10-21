@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BeerController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -30,5 +31,4 @@ Route::get('/dashboard', function () {
 
 require __DIR__.'/auth.php';
 
-Route::get('/beers', fn() => 'OLW ao vivo!')
-    ->middleware(['auth']);
+Route::get('/beers', [BeerController::class, 'index']);
