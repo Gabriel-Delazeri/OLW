@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\Services\PunkapiService;
+use App\Http\Requests\BeerRequest;
 
 class BeerController extends Controller
 {
-    public function index()
+    public function index(BeerRequest $request, PunkapiService $service)
     {
-        $service = new PunkapiService();
-
-        return $service->getBeers();
+        return $service->getBeers( ...$request->validated());
     }
-
 }

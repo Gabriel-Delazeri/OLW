@@ -31,4 +31,12 @@ Route::get('/dashboard', function () {
 
 require __DIR__.'/auth.php';
 
-Route::get('/beers', [BeerController::class, 'index']);
+
+Route::group([
+    'prefix' => 'beers',
+], function () {
+
+    Route::get('/', [BeerController::class, 'index']);
+
+    Route::get('/export', [BeerController::class, 'export']);
+});
