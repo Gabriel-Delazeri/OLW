@@ -38,5 +38,5 @@ Route::group([
 
     Route::get('/', [BeerController::class, 'index']);
 
-    Route::get('/export', [BeerController::class, 'export']);
+    Route::post('/export', [BeerController::class, 'export']);
 });
