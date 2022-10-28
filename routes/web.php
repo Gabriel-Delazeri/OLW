@@ -1,8 +1,10 @@
 <?php
 
-use Illuminate\Foundation\Application;
-use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Foundation\Application;
+use App\Http\Controllers\BeerController;
+use App\Http\Controllers\ExportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,5 +32,16 @@ Route::get('/dashboard', function () {
 
 require __DIR__.'/auth.php';
 
-Route::get('/beers', fn() => 'OLW ao vivo!')
-    ->middleware(['auth']);
+
+Route::group([
+    'prefix' => 'beers',
+    'middleware' => 'auth'
+], function () {
+
+    Route::get('/', [BeerController::class, 'index']);
+
+    Route::get('/export', [BeerController::class, 'export']);
+
+    Route::resource('reports', ExportController::class)
+        ->only(['index', 'destroy']);
+});
